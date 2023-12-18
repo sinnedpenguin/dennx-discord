@@ -7,7 +7,7 @@ const mongoClient = new MongoClient(mongoURI);
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('clear')
-    .setDescription('Clear chat history for the user in this guild.'),
+    .setDescription('Clear chat history.'),
 
   async execute(interaction) {
     try {

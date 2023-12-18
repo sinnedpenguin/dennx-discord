@@ -35,7 +35,7 @@ module.exports = {
 
     client.user.setActivity({
       type: ActivityType.Custom,
-      name: `Chatting`,
+      name: `Chatting with ${totalUsers.toLocaleString()} users.`,
     });
 	},
 };

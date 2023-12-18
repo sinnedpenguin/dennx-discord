@@ -17,7 +17,7 @@ module.exports = {
         { name: ' ', value: ' ' },
         { 
           name: 'Note:', 
-          value: 'Please be aware that both `/chat` and `/c` commands store your chat history in a database to maintain a conversational context during your interactions with DennX. You can delete your chat history by using `/clear`. For one-time questions without storage, use `/ask`.'
+          value: 'Please be aware that both `/chat` and `/c` commands store your chat history in a database to maintain a conversational context during your interactions with **DennX**. You can delete your chat history by using `/clear`. For one-time questions without storage, use `/ask` or `/a`.'
         },
         { name: ' ', value: ' ' },
         { name: `DennX v${package.version}`, value: `:copyright: [sinnedpenguin](${config.developer})` },
