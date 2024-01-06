@@ -74,8 +74,11 @@ module.exports = {
 
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
+      const question = interaction.options.getString('question');
+      const prompt = `You are DennX. Your name is DennX. You're an AI chatbot powered by Google's Gemini Pro. ${question}`
+
       const result = await model.generateContent(
-        interaction.options.getString('question'),
+        prompt,
         generationConfig,
         safetySettings,
       );
