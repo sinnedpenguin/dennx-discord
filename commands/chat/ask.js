@@ -21,7 +21,9 @@ module.exports = {
       const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
       const question = interaction.options.getString('question');
-      const prompt = `You are DennX. Your name is DennX. You're an AI chatbot powered by Google's Gemini Pro. ${question}`
+      const truncatedQuestion = question.substring(0, 256);
+
+      const prompt = `You are DennX. Your name is DennX. You're an AI chatbot powered by Google's Gemini Pro. ${truncatedQuestion}`
 
       const result = await model.generateContent(
         prompt,
@@ -36,7 +38,7 @@ module.exports = {
 
         for (let i = 0; i < totalChunks; i++) {
           const responseEmbed = new EmbedBuilder()
-            .setTitle(`${interaction.options.getString('question')}`)
+            .setTitle(`${truncatedQuestion}`)
             .setDescription(`${chunks[i]}`)
             .setFooter({ text: `${i + 1}/${totalChunks}` })
 
@@ -46,7 +48,7 @@ module.exports = {
         }
       } else {
         const responseEmbed = new EmbedBuilder()
-          .setTitle(`${interaction.options.getString('question')}`)
+          .setTitle(`${truncatedQuestion}`)
           .setDescription(`${responseMessage}`);
 
         await interaction.followUp({
@@ -57,8 +59,8 @@ module.exports = {
       console.error(error);
 
       const responseEmbed = new EmbedBuilder()
-        .setTitle(`${interaction.options.getString('question')}`)
-        .setDescription(`I'm sorry, but I cannot answer that.`)
+        .setTitle(`Error`)
+        .setDescription(`I'm sorry, but there was an error processing your request.`)
 
       await interaction.followUp({ 
         embeds: [responseEmbed]

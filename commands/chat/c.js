@@ -113,13 +113,15 @@ module.exports = {
         { upsert: true }
       );
 
+      const truncatedMessage = interaction.options.getString('message').substring(0, 256); // Limit to 256 characters
+
       if (responseMessage.length > 2000) {
         const chunks = responseMessage.match(/[\s\S]{1,2000}/g) || [];
         const totalChunks = chunks.length;
 
         for (let i = 0; i < totalChunks; i++) {
           const responseEmbed = new EmbedBuilder()
-            .setTitle(`${interaction.options.getString('message')}`)
+            .setTitle(`${truncatedMessage}`)
             .setDescription(`${chunks[i]}`)
             .setFooter({ text: `${i + 1}/${totalChunks}` });
 
@@ -129,7 +131,7 @@ module.exports = {
         }
       } else {
         const responseEmbed = new EmbedBuilder()
-          .setTitle(`${interaction.options.getString('message')}`)
+          .setTitle(`${truncatedMessage}`)
           .setDescription(`${responseMessage}`);
 
         await interaction.followUp({
@@ -140,7 +142,7 @@ module.exports = {
       console.error(error);
 
       const responseEmbed = new EmbedBuilder()
-        .setTitle(`${interaction.options.getString('message')}`)
+        .setTitle(`${truncatedMessage}`)
         .setDescription(`I'm sorry, but I cannot answer that.`);
 
       await interaction.followUp({
