@@ -38,3 +38,7 @@ MONGODB_URI=
 ```shell
 node index.js
 ```
+
+## License
+
+Licensed under the [MIT License](LICENSE).
