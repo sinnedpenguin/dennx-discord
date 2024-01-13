@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { MongoClient } = require('mongodb');
+const config = require('../../config.json');
 const fs = require('fs');
 
 const mongoURI = process.env.MONGODB_URI;
@@ -36,8 +37,8 @@ module.exports = {
 
       const chat = model.startChat({
         history: userChatHistory.history.map(entry => [
-          { role: "user", parts: `You are DennX. Your name is DennX. You're an AI chatbot powered by Google's Gemini Pro. ${entry.parts}` },
-          { role: "model", parts: `Understood. I am DennX. My name is DennX. I'm an AI chatbot powered by Google's Gemini Pro. ${entry.responseMessage}` },
+          { role: "user", parts: `You are ${config.name}. Your name is ${config.name}. You're an AI chatbot powered by Google's Gemini Pro. ${entry.parts}` },
+          { role: "model", parts: `Understood. I am ${config.name}. My name is ${config.name}. I'm an AI chatbot powered by Google's Gemini Pro. ${entry.responseMessage}` },
         ]).flat(),
         generationConfig,
         safetySettings,
@@ -88,8 +89,7 @@ module.exports = {
       console.error(error);
 
       const responseEmbed = new EmbedBuilder()
-        .setTitle(`Error`)
-        .setDescription(`I'm sorry, but there was an error processing your request.`)
+        .setDescription(`I'm sorry, but I cannot answer that.`);
 
       await interaction.followUp({ 
         embeds: [responseEmbed]

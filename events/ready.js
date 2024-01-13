@@ -1,13 +1,9 @@
 const { Events, ActivityType } = require('discord.js');
 const { AutoPoster } = require('topgg-autoposter');
 const { MongoClient } = require('mongodb');
-const express = require('express'); 
 
 const mongoURI = `${process.env.MONGODB_URI}`;
 const mongoClient = new MongoClient(mongoURI);
-
-const app = express(); 
-const port = 3001;
 
 async function connectToMongoDB() {
   try {
@@ -50,13 +46,5 @@ module.exports = {
         name: typeof activity.name === 'function' ? activity.name() : activity.name
       });
     }, 60 * 1000); 
-
-    app.get('/dennxServerCount', (req, res) => {
-      res.send({ serverCount: client.guilds.cache.size });
-    });
-
-    app.listen(port, () => {
-      console.log(`Server is listening at http://localhost:${port}`);
-    });
 	},
 };

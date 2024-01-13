@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const config = require('../../config.json');
 const fs = require('fs');
 
 const { genAI, generationConfig, safetySettings, MODEL_NAME } = require('../../lib/config');
@@ -23,7 +24,7 @@ module.exports = {
       const question = interaction.options.getString('question');
       const truncatedQuestion = question.substring(0, 256);
 
-      const prompt = `You are DennX. Your name is DennX. You're an AI chatbot powered by Google's Gemini Pro. ${truncatedQuestion}`
+      const prompt = `You are ${config.name}. Your name is ${config.name}. You're an AI chatbot powered by Google's Gemini Pro. ${truncatedQuestion}`
 
       const result = await model.generateContent(
         prompt,
@@ -59,8 +60,7 @@ module.exports = {
       console.error(error);
 
       const responseEmbed = new EmbedBuilder()
-        .setTitle(`Error`)
-        .setDescription(`I'm sorry, but there was an error processing your request.`)
+        .setDescription(`I'm sorry, but I cannot answer that.`);
 
       await interaction.followUp({ 
         embeds: [responseEmbed]

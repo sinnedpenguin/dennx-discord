@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { MongoClient } = require('mongodb');
+const config = require('../../config.json');
 const fs = require('fs');
 
 const mongoURI = process.env.MONGODB_URI;
@@ -90,8 +91,8 @@ module.exports = {
 
       const chat = model.startChat({
         history: userChatHistory.history.map(entry => [
-          { role: "user", parts: `You are DennX. Your name is DennX. You're an AI chatbot powered by Google's Gemini Pro. ${entry.parts}` },
-          { role: "model", parts: `Understood. I am DennX. My name is DennX. I'm an AI chatbot powered by Google's Gemini Pro. ${entry.responseMessage}` },
+          { role: "user", parts: `You are ${config.name}. Your name is ${config.name}. You're an AI chatbot powered by Google's Gemini Pro. ${entry.parts}` },
+          { role: "model", parts: `Understood. I am ${config.name}. My name is ${config.name}. I'm an AI chatbot powered by Google's Gemini Pro. ${entry.responseMessage}` },
         ]).flat(),
         generationConfig,
         safetySettings,
@@ -113,7 +114,7 @@ module.exports = {
         { upsert: true }
       );
 
-      const truncatedMessage = interaction.options.getString('message').substring(0, 256); // Limit to 256 characters
+      const truncatedMessage = interaction.options.getString('message').substring(0, 256); 
 
       if (responseMessage.length > 2000) {
         const chunks = responseMessage.match(/[\s\S]{1,2000}/g) || [];

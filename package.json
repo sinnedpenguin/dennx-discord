@@ -1,5 +1,5 @@
 {
-  "name": "dx2",
+  "name": "dennx-discord",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,6 @@
     "@google/generative-ai": "^0.1.1",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
     "mongodb": "^6.3.0",
     "topgg-autoposter": "^2.0.1"
   }
