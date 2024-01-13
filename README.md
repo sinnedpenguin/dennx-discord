@@ -2,6 +2,8 @@
 
 A Discord AI chatbot powered by Google's Gemini Pro.
 
+[Invite to your server](https://discord.com/oauth2/authorize?client_id=1175486521659363328&permissions=3072&scope=bot%20applications.commands)
+
 ![Screenshot 2024-01-13 140035](https://github.com/sinnedpenguin/dennx-discord/assets/133164950/af81241a-2a82-4a5c-9e78-1653c4137e73)
 
 ## Prerequisites
